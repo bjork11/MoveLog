@@ -3,35 +3,33 @@ using System.Collections.Generic;
 
 namespace ConsoleApplication
 {
-
     class Menu
     {
-
         public enum mainMenu { Registertraining = 1, Goals, Completedworkouts, quit }
 
         public enum goalsMenu { Running = 1, biking, Walking }
         public enum completedworkoutsMenu { getResults = 1, setResults, removeResults }
 
-        public enum quitMenu { }
+        public enum quitMenu {tacohej}
 
-        static public List<string> Menylista = new List<string> { "Register training", "Goals", "Results", "Quit" };
-
-        public void Menumenu(List<string> menuChoices)
+        private void GetUserInputForSwitch()
         {
-
-            for (int i = 0; i < menuChoices.Count; i++)
-            {
-
-                Console.WriteLine($"[{i}] {menuChoices[i]}");
-            }
+            int hej = Convert.ToInt32(Console.ReadLine());
         }
 
-        int hej = Convert.ToInt32(Console.ReadLine());
-        public void asdasd(goalsMenu addTrainingMenuCHoice)
+         private void WritesTrainingAlternetives()
         {
+            Console.WriteLine(" 1 | running");
+            Console.WriteLine(" 2 | Biking");
+            Console.WriteLine(" 3 | Walking");
+        }
+
+        public void AddTraining(goalsMenu addTrainingMenuCHoice)
+        {
+            WritesTrainingAlternetives();
+
             switch (addTrainingMenuCHoice)
             {
-
                 case goalsMenu.Running:
                     break;
 
@@ -45,25 +43,34 @@ namespace ConsoleApplication
 
         public void MainMenu(mainMenu mainMenuChoice)
         {
+            Console.WriteLine("1 | Register training");
+            Console.WriteLine("2 | See your goals");
+            Console.WriteLine("3 | Completed workouts");
+            Console.WriteLine("4 | ");
+
             switch (mainMenuChoice)
             {
                 case mainMenu.Registertraining:
+
                     break;
 
                 case mainMenu.Goals:
+
                     break;
 
                 case mainMenu.Completedworkouts:
-
                     break;
 
                 case mainMenu.quit:
                     return;
-
             }
         }
         public void CompletedWorkoutMenu(completedworkoutsMenu CompletedworkoutsMenuchoice)
         {
+            Console.WriteLine("1 | see your results");
+            Console.WriteLine("2 | set rersult");
+            Console.WriteLine("3 | Remove results");
+
             switch (CompletedworkoutsMenuchoice)
             {
 
@@ -80,6 +87,7 @@ namespace ConsoleApplication
 
         public void GoalsMenu(goalsMenu goalsMenuchoice)
         {
+            WritesTrainingAlternetives();
 
             switch (goalsMenuchoice)
             {
@@ -97,6 +105,7 @@ namespace ConsoleApplication
 
             }
         }
+
     }
 
 }

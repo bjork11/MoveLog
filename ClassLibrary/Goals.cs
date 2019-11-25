@@ -9,10 +9,11 @@ namespace ClassLibrary
         protected string type;
         private List<Goals> completedGoals = new List<Goals>();
         protected List<Goals> goalsInProgress = new List<Goals>();
+
+        //Listan används tillfälligt för att ta bort alla avklarade mål från goalsInProgress. Detta för att slippa redigera listan medan vi går igenom den.
         private List<Goals> notCompletedGoals = new List<Goals>();
 
-
-        public void Transfer()
+        public void TransferCompletedGoals()
         {
             foreach (Goals goal in goalsInProgress)
             {
@@ -26,12 +27,12 @@ namespace ClassLibrary
                 }
             }
             goalsInProgress = notCompletedGoals;
+            notCompletedGoals.Clear();
         }
         public virtual bool GoalAchieved()
         {
             return false;
         }
-
 
         public void RemoveGoal()
         {
@@ -41,7 +42,9 @@ namespace ClassLibrary
 
     class DistanceGoal : Goals
     {
+        public static List<DistanceGoal> distanceGoals = new List<DistanceGoal>();
         private int meterTowardsGoal;
+        public int _meterTowardsGoal { get; set; }
         private int goalInMeter;
         public DistanceGoal(int inputMeter)
         {
@@ -65,21 +68,27 @@ namespace ClassLibrary
         {
             goalsInProgress.Add(new DistanceGoal(input));
         }
+
+
     }
     class TimeGoal : Goals
     {
-        private int secondTowardsGoal;
-        private int goalInSecond;
+        public static List<TimeGoal> timeGoals = new List<TimeGoal>();
+        private int secondsTowardsGoal;
+        public int _secondsTowardsGoal { get; set; }
+        private int goalInSeconds;
         public TimeGoal(int inputSecond)
         {
             this.type = "Time";
             goalCompleted = false;
-            secondTowardsGoal = 0;
-            goalInSecond = inputSecond;
+            secondsTowardsGoal = 0;
+            goalInSeconds = inputSecond;
         }
+
+
         public override bool GoalAchieved()
         {
-            if (secondTowardsGoal >= goalInSecond)
+            if (secondsTowardsGoal >= goalInSeconds)
             {
                 return true;
             }

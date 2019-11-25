@@ -9,6 +9,5 @@ namespace ClassLibrary
         DateTime dateOfBirth;
         string userName;
         string password;
-
     }
 }

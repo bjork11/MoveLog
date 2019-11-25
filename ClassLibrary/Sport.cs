@@ -1,74 +1,90 @@
 ﻿using System;
 using System.Collections.Generic;
 
+
 namespace ClassLibrary
 {
-    
-    abstract class Sport
+
+    public abstract class Sport
     {
         //static public bool walkingGoal;
-        protected List<string> completedWorkouts = new List<string>();
+        public static List<string> completedWorkouts = new List<string>();
+        //public List <string> _completedWorkouts {get;}
+
         protected string type;
-        public virtual string PacePerDistance(double distanceInMeters, double timeInSeconds)
+        public virtual string PacePerDistance(int distanceInMeters, int timeInSeconds)
         {
             double distanceInKm = (distanceInMeters / 1000);
             double secondsPerKm = (timeInSeconds / distanceInKm);
+            secondsPerKm = Math.Round(secondsPerKm); 
 
             TimeSpan t = TimeSpan.FromSeconds(secondsPerKm);
+
             return t.ToString();
         }
 
-        public abstract void AddWorkout(double distanceInMeters, double timeInSeconds);
-
-    }
-
-    class Walking : Sport
-    {
-        public Walking()
+        public void AddWorkout(int distanceInMeters, int timeInSeconds)
         {
-            this.type = "Walking";
-        }
+            completedWorkouts.Add($"Workout: {type}. Distance: {distanceInMeters / 1000}km. Time: {timeInSeconds / 60}min. Time Per KM: {PacePerDistance(distanceInMeters, timeInSeconds)}");
 
-/*         public string GetType()
-        {
-            walkingGoal = true;
-            return this.type;
-        } */
+            AddProgressToGoal(timeInSeconds, distanceInMeters);
 
-        public override void AddWorkout(double distanceInMeters, double timeInSeconds)
-        {
-            completedWorkouts.Add($"Workout: {type}. Distance: {distanceInMeters/1000}km. Time: {timeInSeconds/60}min. Min Per KM: {PacePerDistance(distanceInMeters, timeInSeconds)}");
-
-            //if(walkingGoal)
+            foreach (var goal in ClassLibrary.Goals.goalsInProgress)
             {
+                goal.TransferIfCompleted();
+            }
+        }
+    
+    public void AddProgressToGoal(int timeInSeconds, int distanceInMeters)
+    {
+        {
+            foreach (var goal in ClassLibrary.Goals.goalsInProgress)
+            {
+                if (goal.GetType() == typeof(DistanceGoal))
+                {
+                    goal.AddProgress(distanceInMeters);
+                }
 
+                if (goal.GetType() == typeof(TimeGoal))
+                {
+                    goal.AddProgress(timeInSeconds);
+                }
             }
         }
     }
+}
 
-    class Running : Sport
+public class Walking : Sport
+{
+    public Walking()
     {
-        public Running()
-        {
-            this.type = "Running";
-        }
-        public override void AddWorkout(double distanceInMeters, double timeInSeconds)
-        {
-            completedWorkouts.Add($"Workout: {type}. Distance: {distanceInMeters/1000}km. Time: {timeInSeconds/60}min. Min Per KM: {PacePerDistance(distanceInMeters, timeInSeconds)}");
-        }
+        this.type = "Walking";
     }
 
-    class Biking : Sport
-    {
-        public Biking()
-        {
-            this.type = "Biking";
-        }
+    /*         public string GetType()
+            {
+                walkingGoal = true;
+                return this.type;
+            } */
 
-        public override void AddWorkout(double distanceInMeters, double timeInSeconds)
-        {
-            completedWorkouts.Add($"Workout: {type}. Distance: {distanceInMeters/1000}km. Time: {timeInSeconds/60}min. Min Per KM: {PacePerDistance(distanceInMeters, timeInSeconds)}");
-        }
+}
+
+public class Running : Sport
+{
+    public Running()
+    {
+        this.type = "Running";
     }
+
+}
+
+public class Biking : Sport
+{
+    public Biking()
+    {
+        this.type = "Biking";
+    }
+
+}
 
 }

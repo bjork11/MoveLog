@@ -1,33 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using ClassLibrary;
 
 namespace ConsoleApplication
 {
     class Program
     {
+        public static void PrintCompletedWorkouts()
+        {
+            foreach (var workouts in Sport.completedWorkouts)
+            {
+                Console.WriteLine(workouts);
+            }
+        }
         static void Main(string[] args)
         {
+            Running myWorkout = new Running();
 
-            // joel som testar sin kod så att den fungerar. låt stå!
-
-             
-            Menu myMenu = new Menu();
-
-            //convertar coice från enum till int och ber användaren skriva in ett nummer för enum menun!
-              Menu.enumMenuChoice Choice =myMenu.GetUserInputForSwitch();
-              myMenu.MainMenu(Choice);
-
-              /* 
+            myWorkout.AddWorkout(15000, 10000);
             
-            //  Menu.goalsMenu Choice1 = myMenu.GetInputFromUSer();
-            //  myMenu.GoalsMenu(Choice1);
-
-            Menu.completedworkoutsMenu Choice3 = myMenu.GettingUserInputworkouts();
-            myMenu.CompletedWorkoutMenu(Choice3);
-
-            */
-
-        }
+            PrintCompletedWorkouts();
+        }  
     }
 }

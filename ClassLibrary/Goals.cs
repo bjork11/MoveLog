@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace ClassLibrary
 {
-    abstract class Goals
+    public abstract class Goals
     {
         protected bool goalCompleted;
-        protected string type;
+        public string type;
         public static List<Goals> goalsInProgress = new List<Goals>();
-        private List<Goals> completedGoals = new List<Goals>();
+        public static List<Goals> completedGoals = new List<Goals>();
         private List<Goals> notCompletedGoals = new List<Goals>();
 
         //Listan används tillfälligt för att ta bort alla avklarade mål från goalsInProgress. Detta för att slippa redigera listan medan vi går igenom den.
@@ -42,19 +42,25 @@ namespace ClassLibrary
         }
 
         public abstract void AddProgress(int progress);
+
     }
 
-    class DistanceGoal : Goals
+    public class DistanceGoal : Goals
     {
-        public static List<DistanceGoal> distanceGoals = new List<DistanceGoal>();
         private int meterTowardsGoal;
         public int _meterTowardsGoal { get; set; }
         private int goalInMeter;
-        public DistanceGoal(int inputMeter)
+        public DistanceGoal(int inputMeter, string typeOfWorkout)
         {
+            type = typeOfWorkout;
             goalCompleted = false;
             meterTowardsGoal = 0;
             goalInMeter = inputMeter;
+        }
+
+        public override string ToString()
+        {
+            return string.Format($"{type}: {meterTowardsGoal}/{goalInMeter} meter");
         }
 
         public override void AddProgress(int meter)
@@ -73,22 +79,27 @@ namespace ClassLibrary
                 return false;
             }
         }
-        public void AddDistanceGoal(int input)
+        public static void AddDistanceGoal(int input, string type)
         {
-            distanceGoals.Add(new DistanceGoal(input));
+            goalsInProgress.Add(new DistanceGoal(input, type));
         }
     }
-    class TimeGoal : Goals
+    public class TimeGoal : Goals
     {
-        public static List<TimeGoal> timeGoals = new List<TimeGoal>();
         private int secondsTowardsGoal;
         public int _secondsTowardsGoal { get; set; }
         private int goalInSeconds;
-        public TimeGoal(int inputSecond)
+        public TimeGoal(int inputSecond, string typeOfWorkout)
         {
+            type = typeOfWorkout;
             goalCompleted = false;
             secondsTowardsGoal = 0;
             goalInSeconds = inputSecond;
+        }
+
+        public override string ToString()
+        {
+            return string.Format($"{type}: {secondsTowardsGoal}/{goalInSeconds} sekunder");
         }
 
          public override void AddProgress(int seconds)
@@ -107,9 +118,9 @@ namespace ClassLibrary
                 return false;
             }
         }
-        public void AddTimeGoal(int input)
+        public static void AddTimeGoal(int input, string type)
         {
-            timeGoals.Add(new TimeGoal(input));
+            goalsInProgress.Add(new TimeGoal(input, type));
         }
     }
 }

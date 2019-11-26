@@ -16,7 +16,7 @@ namespace ClassLibrary
         {
             double distanceInKm = (distanceInMeters / 1000);
             double secondsPerKm = (timeInSeconds / distanceInKm);
-            secondsPerKm = Math.Round(secondsPerKm); 
+            secondsPerKm = Math.Round(secondsPerKm);
 
             TimeSpan t = TimeSpan.FromSeconds(secondsPerKm);
 
@@ -34,57 +34,63 @@ namespace ClassLibrary
                 goal.TransferIfCompleted();
             }
         }
-    
-    public void AddProgressToGoal(int timeInSeconds, int distanceInMeters)
-    {
-        {
-            foreach (var goal in ClassLibrary.Goals.goalsInProgress)
-            {
-                if (goal.GetType() == typeof(DistanceGoal))
-                {
-                    goal.AddProgress(distanceInMeters);
-                }
 
-                if (goal.GetType() == typeof(TimeGoal))
+        public void AddProgressToGoal(int timeInSeconds, int distanceInMeters)
+        {
+            {
+                foreach (var goal in ClassLibrary.Goals.goalsInProgress)
                 {
-                    goal.AddProgress(timeInSeconds);
+                    if (goal.GetType() == typeof(DistanceGoal))
+                    {
+                        if (type == goal.type)
+                        {
+                            goal.AddProgress(distanceInMeters);
+                        }
+                    }
+
+                    if (goal.GetType() == typeof(TimeGoal))
+                    {
+                        if (type == goal.type)
+                        {
+                            goal.AddProgress(timeInSeconds);
+                        }
+                    }
                 }
             }
         }
     }
-}
 
-public class Walking : Sport
-{
-    public Walking()
+    public class Walking : Sport
     {
-        this.type = "Walking";
+        public Walking()
+        {
+            this.type = "Walking";
+        }
+
+        /*         public string GetType()
+                {
+                    walkingGoal = true;
+                    return this.type;
+                } */
+
     }
 
-    /*         public string GetType()
-            {
-                walkingGoal = true;
-                return this.type;
-            } */
-
-}
-
-public class Running : Sport
-{
-    public Running()
+    public class Running : Sport
     {
-        this.type = "Running";
+        public Running()
+        {
+            this.type = "Running";
+        }
+
     }
 
-}
-
-public class Biking : Sport
-{
-    public Biking()
+    public class Biking : Sport
     {
-        this.type = "Biking";
-    }
+        public Biking()
+        {
+            this.type = "Biking";
+        }
 
-}
+    }
 
 }

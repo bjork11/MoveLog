@@ -13,12 +13,37 @@ namespace ConsoleApplication
                 Console.WriteLine(workouts);
             }
         }
+
+        public static void PrintCompletedGoals()
+        {
+            int i = 0;
+            Console.WriteLine("Goals completed:");
+
+            foreach (var goal in Goals.completedGoals)
+            {
+                i++;
+                Console.WriteLine($"{i}: {goal.ToString()}");
+            }
+        }
+
+        public static void PrintGoalsInProgress()
+        {
+            int i = 0;
+            Console.WriteLine("Goals in progress:");
+
+            foreach (var goal in Goals.goalsInProgress)
+            {
+                i++;
+                Console.WriteLine($"{i}: {goal.ToString()}");
+            }
+        }
         static void Main(string[] args)
         {
-            Running myWorkout = new Running();
-
-            myWorkout.AddWorkout(15000, 10000);
-            
+            Sport workout = new Running();
+            ClassLibrary.DistanceGoal.AddDistanceGoal(10000, "Running");
+            PrintGoalsInProgress();
+            workout.AddWorkout(10000, 5000);
+            PrintCompletedGoals();
             PrintCompletedWorkouts();
         }  
     }

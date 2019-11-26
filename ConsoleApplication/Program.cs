@@ -6,6 +6,7 @@ namespace ConsoleApplication
 {
     class Program
     {
+        /* 
         public static void PrintCompletedWorkouts()
         {
             foreach (var workouts in Sport.completedWorkouts)
@@ -13,13 +14,32 @@ namespace ConsoleApplication
                 Console.WriteLine(workouts);
             }
         }
+        */
         static void Main(string[] args)
         {
             Running myWorkout = new Running();
 
             myWorkout.AddWorkout(15000, 10000);
             
-            PrintCompletedWorkouts();
+           // PrintCompletedWorkouts();
+            
+           /*
+           ---------------------------- joels cod för att testa skiten 
+           Menu menu = new Menu();
+
+           Menu.enumMenuChoice Choice =menu.GetUserInputForSwitch();     
+           menu.MainMenu(Choice);
+
+           */
+
+           
+        
         }  
+
+
+         
+
+         
+
     }
 }

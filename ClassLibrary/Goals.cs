@@ -34,7 +34,7 @@ namespace ClassLibrary
             return false;
         }
 
-        public void RemoveGoal(int input)
+        public static void RemoveGoal(int input)
         {
             goalsInProgress.RemoveAt(input);
         }

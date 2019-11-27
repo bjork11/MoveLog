@@ -6,13 +6,13 @@ namespace ConsoleApplication
 {
     class Menu
     {
-        public enum enumMainMenuChoice { Registertraining = 1, Goals, Completedworkouts, quit }
-        public enum sportChoice { Running = 1, Biking, Walking }
-        public enum completedworkoutsMenu { }
-        public enum TempGoalMenu { Setgoal = 1, seeAllGoals, removeGoal }
-        public enum quitMenu { tacohej }
+        public enum enumMainMenu { Registertraining = 1, Goals, Completedworkouts, quit }
+        public enum enumSportMenu { Running = 1, Biking, Walking }
+        public enum enumCompletedWorkoutsMenu { }
+        public enum enumGoalMenu { Setgoal = 1, seeAllGoals, removeGoal }
+        public enum enumQuitMenu { tacohej }
 
-        public enumMainMenuChoice GetUserInputForSwitch()
+        public enumMainMenu GetUserInputForSwitch()
         {
             Console.WriteLine("Main menu\n");
             Console.WriteLine("1 | Register Training" );
@@ -23,43 +23,48 @@ namespace ConsoleApplication
             Console.Write("Select a nummber: ");
             int input = Convert.ToInt32(Console.ReadLine());
 
-            enumMainMenuChoice Choice = (enumMainMenuChoice)input;
+            enumMainMenu Choice = (enumMainMenu)input;
             return Choice;
         }
 
         // huvudmenyn 
-        public void MainMenu(enumMainMenuChoice Choice)
+        public void MainMenu(enumMainMenu Choice)
         {
             //Printclass myPrintclass = new Printclass();
             switch (Choice)
             {
-                case enumMainMenuChoice.Registertraining:
+                case enumMainMenu.Registertraining:
                     //kör metoden AddTraining
                     Console.WriteLine("Register Training\n");
                     // tar input från användaren och convertar till enum 
-                    Menu.sportChoice Choice1 = GetInputFromUSer();
+                    Menu.enumSportMenu Choice1 = GetInputFromUSer();
                     // går till adderatrännings metoden och tar choice1 som input för de valet och lägger.
                     AddTraining(Choice1);
                     break;
 
-                case enumMainMenuChoice.Goals:
+                case enumMainMenu.Goals:
                     Console.WriteLine("1 | Set a goal");
                     Console.WriteLine("2 | Remove a goal");
                     Console.WriteLine("3 | See your goals");
 
                     Console.Write("Select a nummber: ");
 
-                    int hej = Convert.ToInt32(Console.ReadLine());
+                    int inputForGoal = Convert.ToInt32(Console.ReadLine());
 
-                    switch (hej)
+                    switch (inputForGoal)
                     {
-                        case (int)TempGoalMenu.Setgoal:
+                        case (int)enumGoalMenu.Setgoal:
+                            ChooseTypeOfGoal();
                             break;
 
-                        case (int)TempGoalMenu.removeGoal:
+                        case (int)enumGoalMenu.removeGoal:
+                            Printclass.PrintGoalsInProgress();
+                            Console.WriteLine("Select number of the goal you want to remove: ");
+                            int removeGoalChoice = Convert.ToInt32(Console.ReadLine());
+                            Goals.RemoveGoal(removeGoalChoice - 1);
                             break;
 
-                        case (int)TempGoalMenu.seeAllGoals:
+                        case (int)enumGoalMenu.seeAllGoals:
                             // skriver ut alla mål
                             Printclass.PrintCompletedGoals();
                             Printclass.PrintGoalsInProgress();
@@ -70,13 +75,13 @@ namespace ConsoleApplication
                     }
                     break;
 
-                case enumMainMenuChoice.Completedworkouts:
+                case enumMainMenu.Completedworkouts:
                     Printclass.PrintCompletedWorkouts();
 
                     //kör metoden completedWorkouts och skriver ut alla färdiga workouits
                     break;
 
-                case enumMainMenuChoice.quit:
+                case enumMainMenu.quit:
 
                     return;
 
@@ -85,59 +90,139 @@ namespace ConsoleApplication
             }
         }
 
-        // enum metod som tar input och convertar till enum för input till våra enum switchcase
-        public sportChoice GetInputFromUSer()
+        public void ChooseTypeOfGoal()
         {
-            Console.WriteLine("Inne i GetInputsFromUser");
-            Console.WriteLine("1 | running ");
+            Console.WriteLine("Press 1 for distancegoal, press 2 for timegoal");
+            int input = Convert.ToInt32(Console.ReadLine());
+
+            switch (input)
+            {
+                case 1: 
+                Menu.enumSportMenu choice1 = GetInputFromUSer();
+                ChooseSportForDistanceGoal(choice1);
+                break;
+
+                case 2:
+                Menu.enumSportMenu choice2 = GetInputFromUSer();
+                ChooseSportForTimeGoal(choice2);
+                break;
+
+                default:
+                break;
+            }
+        }
+        public void ChooseSportForDistanceGoal(enumSportMenu choice1)
+        {
+            //Console.WriteLine("What sport would you like to add a goal to?");
+            Console.WriteLine("Enter how many meters your goal should be: ");
+            int inputMeter = Convert.ToInt32(Console.ReadLine());
+            
+            switch (choice1)
+            {
+                case enumSportMenu.Running:
+                
+                ClassLibrary.DistanceGoal.AddDistanceGoal(inputMeter, "Running");
+                break;
+
+                case enumSportMenu.Walking:
+                ClassLibrary.DistanceGoal.AddDistanceGoal(inputMeter, "Walking");
+                break;
+
+                case enumSportMenu.Biking:
+                ClassLibrary.DistanceGoal.AddDistanceGoal(inputMeter, "Biking");
+                break;
+                
+                default:
+                break;
+            }
+        }
+        public void ChooseSportForTimeGoal(enumSportMenu choice2)
+        {
+            //Console.WriteLine("What sport would you like to add a goal to?");
+            Console.WriteLine("Enter how many seconds your goal should be");
+            int inputSecond = Convert.ToInt32(Console.ReadLine());
+
+            switch (choice2)
+            {
+                case enumSportMenu.Running:
+                ClassLibrary.TimeGoal.AddTimeGoal(inputSecond, "Running");
+                break;
+
+                case enumSportMenu.Walking:
+                ClassLibrary.TimeGoal.AddTimeGoal(inputSecond, "Walking");
+                break;
+
+                case enumSportMenu.Biking:
+                ClassLibrary.TimeGoal.AddTimeGoal(inputSecond, "Biking");
+                break;
+                
+                default:
+                break;
+            }
+        }
+
+
+        // enum metod som tar input och convertar till enum för input till våra enum switchcase
+        public enumSportMenu GetInputFromUSer()
+        {
+            Console.WriteLine("Choose Sport: ");
+            Console.WriteLine("1 | Running ");
             Console.WriteLine("2 | Walking ");
             Console.WriteLine("3 | Biking \n");
 
             Console.Write("Select a nummber: ");
             int input = Convert.ToInt32(Console.ReadLine());
 
-            sportChoice Choice2 = (sportChoice)input;
+            enumSportMenu Choice2 = (enumSportMenu)input;
             return Choice2;
         }
 
-        public void AddTraining(sportChoice Choice2)
+        public void TestSetGoal()
+        {
+
+        }
+
+        public void AddTraining(enumSportMenu Choice2)
         {
             Console.WriteLine("i addtraining");
             switch (Choice2)
             {
                 // under dessa 3 alternativ ska man sedan skriva in distance, time, för den sporten man gjort
-                case sportChoice.Running:
+                case enumSportMenu.Running:
+                    ClassLibrary.Running runningWorkout = new Running();
                     break;
 
-                case sportChoice.Walking:
+                case enumSportMenu.Walking:
+                    ClassLibrary.Walking walkingWorkout = new Walking();
                     break;
 
-                case sportChoice.Biking:
+                case enumSportMenu.Biking:
+                    ClassLibrary.Biking bikingWorkout = new Biking();
                     break;
 
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
-
-        public void GoalsMenu(TempGoalMenu choice5)
+        /*
+        public void GoalsMenu(enumGoalMenu choice5)
         {
             Console.WriteLine("Goals Menu");
             switch (choice5)
             {
-                case TempGoalMenu.Setgoal:
+                case enumGoalMenu.Setgoal:
                     Console.WriteLine("goalsmenu 1");
                     // Tilllallar setgoals metoden för att sätta mål
-                    Menu.sportChoice Choice1 = GetInputFromUSer();
+                    Menu.enumSportMenu Choice1 = GetInputFromUSer();
                     SetSportForGoal(Choice1);
                     break;
 
-                case TempGoalMenu.removeGoal:
+                case enumGoalMenu.removeGoal:
                     Console.WriteLine("goalsmenu 2");
                     // ska ta bort 1 mål
                     break;
 
-                case TempGoalMenu.seeAllGoals:
+                case enumGoalMenu.seeAllGoals:
                     Console.WriteLine("goalsmenu 3");
                     // visar alla mål
                     break;
@@ -145,55 +230,37 @@ namespace ConsoleApplication
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        }
+        } */
         // När man ska välja mål måste man välja sport först.
-        public void SetSportForGoal(sportChoice choice6)
+        public void SetSportForGoal(enumSportMenu choice6)
         {
-            Console.WriteLine("i sportchoice");
+            Console.WriteLine("i enumSportMenu");
             switch (choice6)
             {
-                case sportChoice.Biking:
-                    Console.WriteLine("i sportchoice 1");
+                case enumSportMenu.Biking:
+                    Console.WriteLine("i enumSportMenu 1");
                     break;
 
-                case sportChoice.Running:
-                    Console.WriteLine("i sportchoice 2");
+                case enumSportMenu.Running:
+                    Console.WriteLine("i enumSportMenu 2");
                     break;
 
-                case sportChoice.Walking:
-                    Console.WriteLine("i sportchoice 3");
+                case enumSportMenu.Walking:
+                    Console.WriteLine("i enumSportMenu 3");
                     break;
 
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
-
-        public void CompletedWorkoutMenu(completedworkoutsMenu Choice)
-        {
-            // foraech för att skriva ut alla träningpass i completed workouts listan
-
-            //foreach ()
-        }
-
-        public completedworkoutsMenu GettingUserInputworkouts()
+        public enumCompletedWorkoutsMenu GettingUserInputworkouts()
         {
             Console.WriteLine("Select a nummber");
             int input = Convert.ToInt32(Console.ReadLine());
 
-            completedworkoutsMenu Choice3 = (completedworkoutsMenu)input;
+            enumCompletedWorkoutsMenu Choice3 = (enumCompletedWorkoutsMenu)input;
             return Choice3;
         }
-
-        public void ShowGoals()
-        {
-            // kommer att skriva ut alla mål som finns
-
-
-
-        }
-
-
         public void ConsoleReadlineTryCatch()
         {
             try

@@ -6,11 +6,10 @@ namespace ClassLibrary
 {
     public abstract class Sport
     {
-        //static public bool walkingGoal;
+        //När AddWorkout körs läggs träningspasset till i listan completedWorkouts
         public static List<string> completedWorkouts = new List<string>();
-        //public List <string> _completedWorkouts {get;}
-
         protected string type;
+        //Metod för att räkna ut hur lång tid varje kilometer tagit i genomsnitt.
         public virtual string PacePerDistance(int distanceInMeters, int timeInSeconds)
         {
             double distanceInKm = (distanceInMeters / 1000);
@@ -22,6 +21,9 @@ namespace ClassLibrary
             return t.ToString();
         }
 
+        //Lägger till träningspass där avnändaren får mata in distans och tid på träningspasset. 
+        //Kollar sedan om något mål av samma typ finns och uppdaterar det.
+        //Och därefter flyttar den målet från listan "goalsinProgress" till listan "goalsCompleted"
         public void AddWorkout(int distanceInMeters, int timeInSeconds)
         {
             completedWorkouts.Add($"Workout: {type}. Distance: {distanceInMeters / 1000}km. Time: {timeInSeconds / 60}min. Time Per KM: {PacePerDistance(distanceInMeters, timeInSeconds)}");
@@ -31,6 +33,9 @@ namespace ClassLibrary
             Goals.TransferIfCompleted();
         }
 
+        //Lägger till träningspassets tid/distans till respektive mål om ett sådant finns.
+        //Kollar först typen av "goal". (distance/time)
+        //Därefter kollar den typen av "Sport". Annars hade varje Distancegoal uppdaterats oavsett om det är walking/biking/running som utförs.
         public void AddProgressToGoal(int timeInSeconds, int distanceInMeters)
         {
             {

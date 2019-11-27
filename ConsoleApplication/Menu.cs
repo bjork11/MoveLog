@@ -1,86 +1,89 @@
 using System;
 using System.Collections.Generic;
+using ClassLibrary;
 
 namespace ConsoleApplication
 {
     class Menu
     {
-        public enum enumMenuChoice { Registertraining = 1, Goals, Completedworkouts, quit }
+        public enum enumMainMenuChoice { Registertraining = 1, Goals, Completedworkouts, quit }
         public enum sportChoice { Running = 1, Biking, Walking }
         public enum completedworkoutsMenu { }
         public enum TempGoalMenu { Setgoal = 1, seeAllGoals, removeGoal }
         public enum quitMenu { tacohej }
-        
-            public enumMenuChoice GetUserInputForSwitch()
+
+        public enumMainMenuChoice GetUserInputForSwitch()
+        {
+            Console.WriteLine("Main menu\n");
+            Console.WriteLine("1 | Register Training" );
+            Console.WriteLine("2 | goals");
+            Console.WriteLine("3 | Completed workouts");
+            Console.WriteLine("4 | quit\n");
+
+            Console.Write("Select a nummber: ");
+            int input = Convert.ToInt32(Console.ReadLine());
+
+            enumMainMenuChoice Choice = (enumMainMenuChoice)input;
+            return Choice;
+        }
+
+        // huvudmenyn 
+        public void MainMenu(enumMainMenuChoice Choice)
+        {
+            //Printclass myPrintclass = new Printclass();
+            switch (Choice)
             {
-                
-                Console.WriteLine("Main menu\n");
-                Console.WriteLine("1 | Register training");
-                Console.WriteLine("2 | goals");
-                Console.WriteLine("3 | Completed workouts");
-                Console.WriteLine("4 | quit\n");
+                case enumMainMenuChoice.Registertraining:
+                    //kör metoden AddTraining
+                    Console.WriteLine("Register Training\n");
+                    // tar input från användaren och convertar till enum 
+                    Menu.sportChoice Choice1 = GetInputFromUSer();
+                    // går till adderatrännings metoden och tar choice1 som input för de valet och lägger.
+                    AddTraining(Choice1);
+                    break;
 
-                Console.Write("Select a nummber: ");
-                int input = Convert.ToInt32(Console.ReadLine());
-        
-                enumMenuChoice Choice = (enumMenuChoice)input;
-                return Choice;
+                case enumMainMenuChoice.Goals:
+                    Console.WriteLine("1 | Set a goal");
+                    Console.WriteLine("2 | Remove a goal");
+                    Console.WriteLine("3 | See your goals");
+
+                    Console.Write("Select a nummber: ");
+
+                    int hej = Convert.ToInt32(Console.ReadLine());
+
+                    switch (hej)
+                    {
+                        case (int)TempGoalMenu.Setgoal:
+                            break;
+
+                        case (int)TempGoalMenu.removeGoal:
+                            break;
+
+                        case (int)TempGoalMenu.seeAllGoals:
+                            // skriver ut alla mål
+                            Printclass.PrintCompletedGoals();
+                            Printclass.PrintGoalsInProgress();
+                            break;
+
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                    break;
+
+                case enumMainMenuChoice.Completedworkouts:
+                    Printclass.PrintCompletedWorkouts();
+
+                    //kör metoden completedWorkouts och skriver ut alla färdiga workouits
+                    break;
+
+                case enumMainMenuChoice.quit:
+
+                    return;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
-
-            // huvudmenyn 
-            public void MainMenu(enumMenuChoice Choice)
-            {
-                switch (Choice)
-                {
-                    case enumMenuChoice.Registertraining:
-                        //kör metoden AddTraining
-                        Console.WriteLine("Register Training\n");
-                        // tar input från användaren och convertar till enum 
-                        Menu.sportChoice Choice1 = GetInputFromUSer();
-                        // går till adderatrännings metoden och tar choice1 som input för de valet
-                        AddTraining(Choice1);
-                        break;
-
-                    case enumMenuChoice.Goals:
-
-                        Console.WriteLine("1 | Set a goal");
-                        Console.WriteLine("2 | Remove a goal");
-                        Console.WriteLine("3 | See your goals");
-
-                        Console.Write("Select a nummber: ");
-
-                        int hej = Convert.ToInt32(Console.ReadLine());
-
-                        switch (hej)
-                        {
-                            case (int)TempGoalMenu.Setgoal:
-
-                                break;
-
-                            case (int)TempGoalMenu.removeGoal:
-                                break;
-
-                            case (int)TempGoalMenu.seeAllGoals:
-                                break;
-
-                            default:
-                                throw new ArgumentOutOfRangeException();
-                        }
-                        break;
-
-                    case enumMenuChoice.Completedworkouts:
-                        Console.WriteLine("main 3");
-                        //kör metoden completedWorkouts
-                        break;
-
-                    case enumMenuChoice.quit:
-                    
-                        return;
-
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-            }
+        }
 
         // enum metod som tar input och convertar till enum för input till våra enum switchcase
         public sportChoice GetInputFromUSer()
@@ -162,11 +165,10 @@ namespace ConsoleApplication
                     break;
 
                 default:
-                    Console.WriteLine("Bara 1-3 sportChoicessss");
-                    break;
+                    throw new ArgumentOutOfRangeException();
             }
         }
-        
+
         public void CompletedWorkoutMenu(completedworkoutsMenu Choice)
         {
             // foraech för att skriva ut alla träningpass i completed workouts listan
@@ -190,6 +192,26 @@ namespace ConsoleApplication
 
 
         }
+
+
+        public void ConsoleReadlineTryCatch()
+        {
+            try
+            {
+
+                int userInpu = Convert.ToInt32(Console.ReadLine());
+            }
+
+            catch
+            {
+                Console.WriteLine("Only Numbbers");
+            }
+
+        }
     }
 }
 
+
+
+
+// try catch metod för console.readline

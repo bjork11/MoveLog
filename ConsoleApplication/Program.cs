@@ -8,7 +8,12 @@ namespace ConsoleApplication
     {        
         static void Main(string[] args)
         {
-          
+            
+            Menu menu = new Menu();
+
+            Menu.enumMainMenu choice = menu.GetUserInputForSwitch();
+            menu.MainMenu(choice);
+
         }  
     }
 }

@@ -34,9 +34,9 @@ namespace ClassLibrary
             return false;
         }
 
-        public void RemoveGoal()
+        public void RemoveGoal(int input)
         {
-
+            goalsInProgress.RemoveAt(input);
         }
 
         public abstract void AddProgress(int progress);

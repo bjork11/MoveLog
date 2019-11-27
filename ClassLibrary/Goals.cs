@@ -9,15 +9,14 @@ namespace ClassLibrary
         public string type;
         public static List<Goals> goalsInProgress = new List<Goals>();
         public static List<Goals> completedGoals = new List<Goals>();
-        private List<Goals> notCompletedGoals = new List<Goals>();
 
         //Listan används tillfälligt för att ta bort alla avklarade mål från goalsInProgress. Detta för att slippa redigera listan medan vi går igenom den.
-        public void TransferIfCompleted()
+        public static void TransferIfCompleted()
         {
+            List<Goals> notCompletedGoals = new List<Goals>();
+
             foreach (Goals goal in goalsInProgress)
             {
-                //goal.GetType() == typeof(DistanceGoal)
-                
                 if (goal.GoalAchieved())
                 {
                     completedGoals.Add(goal);
@@ -25,11 +24,10 @@ namespace ClassLibrary
                 else
                 {
                     notCompletedGoals.Add(goal);
-                }
+                } 
             }
 
-            goalsInProgress = notCompletedGoals;
-            notCompletedGoals.Clear();
+            goalsInProgress = notCompletedGoals; 
         }
         public virtual bool GoalAchieved()
         {

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 namespace ClassLibrary
 {
-
     public abstract class Sport
     {
         //static public bool walkingGoal;
@@ -29,10 +28,7 @@ namespace ClassLibrary
 
             AddProgressToGoal(timeInSeconds, distanceInMeters);
 
-            foreach (var goal in ClassLibrary.Goals.goalsInProgress)
-            {
-                goal.TransferIfCompleted();
-            }
+            Goals.TransferIfCompleted();
         }
 
         public void AddProgressToGoal(int timeInSeconds, int distanceInMeters)
@@ -66,13 +62,6 @@ namespace ClassLibrary
         {
             this.type = "Walking";
         }
-
-        /*         public string GetType()
-                {
-                    walkingGoal = true;
-                    return this.type;
-                } */
-
     }
 
     public class Running : Sport
@@ -92,5 +81,4 @@ namespace ClassLibrary
         }
 
     }
-
 }

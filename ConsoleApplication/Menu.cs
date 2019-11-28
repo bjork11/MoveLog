@@ -31,68 +31,66 @@ namespace ConsoleApplication
         // huvudmenyn 
         public void MainMenu(enumMainMenu Choice)
         {
-            switch (Choice)
-            {
-                case enumMainMenu.Registertraining:
-                    Console.Clear();
-                    Console.WriteLine("Register Training\n");
-                    // tar input från användaren och convertar till enum 
-                    Menu.enumSportMenu Choice1 = GetInputFromUser();
-                    //går till addtraining metoden och tar sedan input från GetInputFromUser Metoden över för de valet och l
-                    AddTraining(Choice1);
-                    break;
+                switch (Choice)
+                {
+                    case enumMainMenu.Registertraining:
+                        Console.Clear();
+                        Console.WriteLine("Register Training\n");
+                        // tar input från användaren och convertar till enum 
+                        Menu.enumSportMenu Choice1 = GetInputFromUser();
+                        //går till addtraining metoden och tar sedan input från GetInputFromUser Metoden över för de valet och l
+                        AddTraining(Choice1);
+                        break;
 
-                case enumMainMenu.Goals:
-                    Console.WriteLine("1 | Set a goal");
-                    Console.WriteLine("2 | Remove a goal");
-                    Console.WriteLine("3 | See your goals");
+                    case enumMainMenu.Goals:
+                        Console.WriteLine("1 | Set a goal");
+                        Console.WriteLine("2 | Remove a goal");
+                        Console.WriteLine("3 | See your goals");
 
-                    Console.Write("Select a number: ");
-                    // try catch metod som tar int user input för switch val
-                    int inputForGoal = IntUserInputTryCatch();
+                        Console.Write("Select a number: ");
+                        // try catch metod som tar int user input för switch val
+                        int inputForGoal = IntUserInputTryCatch();
 
-                    switch (inputForGoal)
-                    {
-                        case (int)enumGoalMenu.Setgoal:
-                            ChooseTypeOfGoal();
-                            break;
+                        switch (inputForGoal)
+                        {
+                            case (int)enumGoalMenu.Setgoal:
+                                ChooseTypeOfGoal();
+                                break;
 
-                        case (int)enumGoalMenu.removeGoal:
-                            Printclass.PrintGoalsInProgress();
-                            Console.WriteLine("Select the number of the goal you want to remove: ");
-                            int removeGoalChoice = IntUserInputTryCatch();
-                            Goals.RemoveGoal(removeGoalChoice - 1);
-                            break;
+                            case (int)enumGoalMenu.removeGoal:
+                                Printclass.PrintGoalsInProgress();
+                                Console.WriteLine("Select the number of the goal you want to remove: ");
+                                int removeGoalChoice = IntUserInputTryCatch();
+                                Goals.RemoveGoal(removeGoalChoice - 1);
+                                break;
 
-                        case (int)enumGoalMenu.seeAllGoals:
-                            Printclass.PrintCompletedGoals();
-                            Printclass.PrintGoalsInProgress();
-                            break;
+                            case (int)enumGoalMenu.seeAllGoals:
+                                Printclass.PrintCompletedGoals();
+                                Printclass.PrintGoalsInProgress();
+                                break;
 
-                        default:
-                            throw new ArgumentOutOfRangeException("1-3 only");
-                    }
-                    break;
+                            default:
+                                throw new ArgumentOutOfRangeException("1-3 only");
+                        }
+                        break;
 
-                case enumMainMenu.Completedworkouts:
-                    Printclass.PrintCompletedWorkouts();
-                    break;
+                    case enumMainMenu.Completedworkouts:
+                        Printclass.PrintCompletedWorkouts();
+                        break;
 
-                case enumMainMenu.quit:
-                    return;
+                    case enumMainMenu.quit:
+                        return;
 
-                default:
-                    throw new ArgumentOutOfRangeException("1-4 only");
-            }
+                    default:
+                        throw new ArgumentOutOfRangeException("1-4 only");
+                }
         }
-
         public void ChooseTypeOfGoal()
         {
             Console.WriteLine("1 | Set Distance Goal");
             Console.WriteLine("2 | Set Time Goal");
             Console.Write(": ");
             int input = IntUserInputTryCatch();
-            
 
             switch (input)
             {
@@ -215,42 +213,31 @@ namespace ConsoleApplication
                     throw new ArgumentOutOfRangeException("Only 1-3");
             }
         }
-        /* 
-        ////Behövs denna?
-        public enumCompletedWorkoutsMenu GettingUserInputworkouts()
-        {
-
-            Console.WriteLine("Select a number");
-            int input = Convert.ToInt32(Console.ReadLine());
-
-            enumCompletedWorkoutsMenu Choice3 = (enumCompletedWorkoutsMenu)input;
-            return Choice3;
-        }
-        */
         public int IntUserInputTryCatch()
         {
             bool doWhileLoop = true;
             int userInput = 0;
-            
-            do {
+
+            do
+            {
                 Console.Write("Choice : ");
 
-            try
-            {
-               userInput = Convert.ToInt32(Console.ReadLine());
+                try
+                {
+                    userInput = Convert.ToInt32(Console.ReadLine());
 
-               doWhileLoop = false;
-               
-            }
+                    doWhileLoop = false;
 
-            catch
-            {
-                Console.WriteLine("Only Numbers");
-            }
+                }
+
+                catch
+                {
+                    Console.WriteLine("Only Numbers");
+                }
 
             } while (doWhileLoop);
 
-                return userInput;
+            return userInput;
         }
     }
 }

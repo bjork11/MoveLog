@@ -21,16 +21,21 @@ namespace ConsoleApplication
             Console.WriteLine("4 | Quit\n");
 
             Console.Write("Select a number: ");
-            // try catch
+            
             int input = IntUserInputTryCatch();
-
             enumMainMenu Choice = (enumMainMenu)input;
+
             return Choice;
         }
 
         // huvudmenyn 
         public void MainMenu(enumMainMenu Choice)
         {
+           // bool doWhileLoop = true;
+
+            do
+            {
+            
                 switch (Choice)
                 {
                     case enumMainMenu.Registertraining:
@@ -43,6 +48,11 @@ namespace ConsoleApplication
                         break;
 
                     case enumMainMenu.Goals:
+                        // do while loop sedan.
+                        bool doWhileLoop = true;
+
+                        do {
+
                         Console.WriteLine("1 | Set a goal");
                         Console.WriteLine("2 | Remove a goal");
                         Console.WriteLine("3 | See your goals");
@@ -62,6 +72,7 @@ namespace ConsoleApplication
                                 Console.WriteLine("Select the number of the goal you want to remove: ");
                                 int removeGoalChoice = IntUserInputTryCatch();
                                 Goals.RemoveGoal(removeGoalChoice - 1);
+
                                 break;
 
                             case (int)enumGoalMenu.seeAllGoals:
@@ -70,8 +81,12 @@ namespace ConsoleApplication
                                 break;
 
                             default:
-                                throw new ArgumentOutOfRangeException("1-3 only");
+                                doWhileLoop = false;
+                                Console.WriteLine("1-3 only");
+                                break;
                         }
+
+                        } while (doWhileLoop == true); 
                         break;
 
                     case enumMainMenu.Completedworkouts:
@@ -83,7 +98,15 @@ namespace ConsoleApplication
 
                     default:
                         throw new ArgumentOutOfRangeException("1-4 only");
+
                 }
+
+             } while (Choice >= Menu.enumMainMenu.quit);
+
+             //Choice != Menu.enumMainMenu.Registertraining || Choice != Menu.enumMainMenu.Goals || Choice != Menu.enumMainMenu.quit);
+    
+                    
+                
         }
         public void ChooseTypeOfGoal()
         {
@@ -225,7 +248,6 @@ namespace ConsoleApplication
                 try
                 {
                     userInput = Convert.ToInt32(Console.ReadLine());
-
                     doWhileLoop = false;
 
                 }
@@ -246,3 +268,4 @@ namespace ConsoleApplication
 
 
 // try catch metod för console.readline
+// fixa user input och converta efter

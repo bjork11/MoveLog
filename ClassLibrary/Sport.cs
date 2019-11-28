@@ -10,7 +10,7 @@ namespace ClassLibrary
         public static List<string> completedWorkouts = new List<string>();
         protected string type;
         //Metod för att räkna ut hur lång tid varje kilometer tagit i genomsnitt.
-        public virtual string PacePerDistance(int distanceInMeters, int timeInSeconds)
+        public virtual string PacePerDistance(double distanceInMeters, double timeInSeconds)
         {
             double distanceInKm = (distanceInMeters / 1000);
             double secondsPerKm = (timeInSeconds / distanceInKm);

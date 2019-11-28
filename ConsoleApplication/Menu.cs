@@ -21,7 +21,8 @@ namespace ConsoleApplication
             Console.WriteLine("4 | Quit\n");
 
             Console.Write("Select a number: ");
-            int input = Convert.ToInt32(Console.ReadLine());
+            // try catch
+            int input = IntUserInputTryCatch();
 
             enumMainMenu Choice = (enumMainMenu)input;
             return Choice;
@@ -36,10 +37,9 @@ namespace ConsoleApplication
                     Console.Clear();
                     Console.WriteLine("Register Training\n");
                     // tar input från användaren och convertar till enum 
-                    Menu.enumSportMenu Choice1 = GetInputFromUSer();
-                    // går till adderatrännings metoden och tar choice1 som input för de valet och lägger.
+                    Menu.enumSportMenu Choice1 = GetInputFromUser();
+                    //går till addtraining metoden och tar sedan input från GetInputFromUser Metoden över för de valet och l
                     AddTraining(Choice1);
-
                     break;
 
                 case enumMainMenu.Goals:
@@ -48,8 +48,8 @@ namespace ConsoleApplication
                     Console.WriteLine("3 | See your goals");
 
                     Console.Write("Select a number: ");
-
-                    int inputForGoal = Convert.ToInt32(Console.ReadLine());
+                    // try catch metod som tar int user input för switch val
+                    int inputForGoal = IntUserInputTryCatch();
 
                     switch (inputForGoal)
                     {
@@ -60,7 +60,7 @@ namespace ConsoleApplication
                         case (int)enumGoalMenu.removeGoal:
                             Printclass.PrintGoalsInProgress();
                             Console.WriteLine("Select the number of the goal you want to remove: ");
-                            int removeGoalChoice = Convert.ToInt32(Console.ReadLine());
+                            int removeGoalChoice = IntUserInputTryCatch();
                             Goals.RemoveGoal(removeGoalChoice - 1);
                             break;
 
@@ -70,7 +70,7 @@ namespace ConsoleApplication
                             break;
 
                         default:
-                            throw new ArgumentOutOfRangeException();
+                            throw new ArgumentOutOfRangeException("1-3 only");
                     }
                     break;
 
@@ -82,7 +82,7 @@ namespace ConsoleApplication
                     return;
 
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException("1-4 only");
             }
         }
 
@@ -91,34 +91,35 @@ namespace ConsoleApplication
             Console.WriteLine("1 | Set Distance Goal");
             Console.WriteLine("2 | Set Time Goal");
             Console.Write(": ");
-            int input = Convert.ToInt32(Console.ReadLine());
+            int input = IntUserInputTryCatch();
+            
 
             switch (input)
             {
                 case 1:
-                    Menu.enumSportMenu choice1 = GetInputFromUSer();
+                    Menu.enumSportMenu choice1 = GetInputFromUser();
                     ChooseSportForDistanceGoal(choice1);
                     break;
 
                 case 2:
-                    Menu.enumSportMenu choice2 = GetInputFromUSer();
+                    Menu.enumSportMenu choice2 = GetInputFromUser();
                     ChooseSportForTimeGoal(choice2);
                     break;
 
                 default:
-                    break;
+                    throw new ArgumentOutOfRangeException("Only 1-2");
             }
         }
         public void ChooseSportForDistanceGoal(enumSportMenu choice1)
         {
-            //Console.WriteLine("What sport would you like to add a goal to?");
+            //Console.WriteLine("What sport would you like to add a goal to?")
+            // try catch metdo för input
             Console.WriteLine("Enter how many meters your goal should be: ");
-            int inputMeter = Convert.ToInt32(Console.ReadLine());
+            int inputMeter = IntUserInputTryCatch();
 
             switch (choice1)
             {
                 case enumSportMenu.Running:
-
                     ClassLibrary.DistanceGoal.AddDistanceGoal(inputMeter, "Running");
                     break;
 
@@ -131,14 +132,14 @@ namespace ConsoleApplication
                     break;
 
                 default:
-                    break;
+                    throw new ArgumentOutOfRangeException("Only 1-3");
             }
         }
         public void ChooseSportForTimeGoal(enumSportMenu choice2)
         {
-            //Console.WriteLine("What sport would you like to add a goal to?");
+            //try catch metod för input
             Console.WriteLine("Enter how many seconds your goal should be");
-            int inputSecond = Convert.ToInt32(Console.ReadLine());
+            int inputSecond = IntUserInputTryCatch();
 
             switch (choice2)
             {
@@ -155,20 +156,21 @@ namespace ConsoleApplication
                     break;
 
                 default:
-                    break;
+                    throw new ArgumentOutOfRangeException("Only 1-3");
             }
         }
 
 
         // enum metod som tar input och convertar till enum för input till våra enum switchcase
-        public enumSportMenu GetInputFromUSer()
+        public enumSportMenu GetInputFromUser()
         {
             Console.WriteLine("1 | Running ");
             Console.WriteLine("2 | Walking ");
             Console.WriteLine("3 | Biking \n");
 
-            Console.Write("Choose Sport: ");
-            int input = Convert.ToInt32(Console.ReadLine());
+            // try catch för input
+            Console.WriteLine("What sport? ");
+            int input = IntUserInputTryCatch();
 
             enumSportMenu Choice2 = (enumSportMenu)input;
             return Choice2;
@@ -176,18 +178,19 @@ namespace ConsoleApplication
         public int GetWorkoutDistance()
         {
             Console.Write("Enter distance in meters: ");
-            int inputMeters = Convert.ToInt32(Console.ReadLine());
+            int inputMeters = IntUserInputTryCatch();
             return inputMeters;
         }
         public int GetWorkoutTime()
         {
             Console.Write("Enter time in seconds: ");
-            int inputSeconds = Convert.ToInt32(Console.ReadLine());
+            int inputSeconds = IntUserInputTryCatch();
             return inputSeconds;
         }
 
         public void AddTraining(enumSportMenu Choice2)
         {
+            // try catch för input
             int inputMeters = GetWorkoutDistance();
             int inputSeconds = GetWorkoutTime();
 
@@ -209,23 +212,35 @@ namespace ConsoleApplication
                     break;
 
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException("Only 1-3");
             }
         }
+        /* 
+        ////Behövs denna?
         public enumCompletedWorkoutsMenu GettingUserInputworkouts()
         {
+
             Console.WriteLine("Select a number");
             int input = Convert.ToInt32(Console.ReadLine());
 
             enumCompletedWorkoutsMenu Choice3 = (enumCompletedWorkoutsMenu)input;
             return Choice3;
         }
-        public void ConsoleReadlineTryCatch()
+        */
+        public int IntUserInputTryCatch()
         {
+            bool doWhileLoop = true;
+            int userInput = 0;
+            
+            do {
+                Console.Write("Choice : ");
+
             try
             {
+               userInput = Convert.ToInt32(Console.ReadLine());
 
-                int userInpu = Convert.ToInt32(Console.ReadLine());
+               doWhileLoop = false;
+               
             }
 
             catch
@@ -233,6 +248,9 @@ namespace ConsoleApplication
                 Console.WriteLine("Only Numbers");
             }
 
+            } while (doWhileLoop);
+
+                return userInput;
         }
     }
 }

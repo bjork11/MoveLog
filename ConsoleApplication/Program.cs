@@ -9,24 +9,22 @@ namespace ConsoleApplication
         static void Main(string[] args)
         {
             // do while loop för main menyn
-            bool doWileLoopForMainMenu = true;
-
+            Menu menu = new Menu();
             do
             {
                 // Gör en instans av memyn klassen, tillkallar userinput som convertas till enum och skickas in i mainmenun.
-                Menu menu = new Menu();
-                Menu.enumMainMenu choice = menu.GetUserInputForSwitch();
-        
+                Menu.enumMainMenu choice = menu.GetUserInputMainMenuSwitch();
+
                 if (choice == Menu.enumMainMenu.quit)
                 {
-                    doWileLoopForMainMenu = false;
+                    return;
                 }
                 else
                 {
                     menu.MainMenu(choice);
                 }
 
-            } while (doWileLoopForMainMenu == true);
+            } while (true);
         }
     }
 }

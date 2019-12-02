@@ -6,15 +6,15 @@ namespace ClassLibrary
     {
         string firstName;
         string lastName;
-        string DateOfBirth;
+        DateTime dateOfBirth;
         string userName;
         string password;
         
-        public User(string aFirstName, string aLastName, string aDateOfBirth)
+        public User(string _FirstName, string _LastName, DateTime _DateOfBirth)
         {
-            firstName = aFirstName;
-            lastName = aLastName;
-            DateOfBirth = aDateOfBirth;
+            firstName = _FirstName;
+            lastName = _LastName;
+            dateOfBirth = _DateOfBirth;
         }
     }
 }

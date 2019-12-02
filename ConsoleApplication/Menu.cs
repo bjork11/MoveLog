@@ -43,7 +43,6 @@ namespace ConsoleApplication
                 catch
                 {
                     Console.WriteLine("Only numbers between 1-4!");
-                    Console.ReadLine();
                 }
 
             } while (true);
@@ -85,7 +84,7 @@ namespace ConsoleApplication
 
                             case (int)enumGoalMenu.removeGoal:
                                 Printclass.PrintGoalsInProgress();
-                                Console.WriteLine("Select the number of the goal you want to remove: ");
+                                Console.Write("Select the number of the goal you want to remove");
 
                                 do
                                 {

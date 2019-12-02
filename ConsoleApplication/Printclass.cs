@@ -11,13 +11,13 @@ namespace ConsoleApplication
             {
                 Console.WriteLine(workouts);
             }
-            Console.ReadLine();
 
             if (Sport.completedWorkouts.Count == 0)
             {
                 Console.WriteLine("You havn't registered any workouts yet! :(");
             }
 
+            Console.ReadLine();
         }
         public static void PrintCompletedGoals()
         {

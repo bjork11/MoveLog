@@ -39,11 +39,11 @@ namespace ClassLibrary
         public void AddProgressToGoal(int timeInSeconds, int distanceInMeters)
         {
             {
-                foreach (var goal in ClassLibrary.Goals.goalsInProgress)
+                foreach (var goal in Goals.goalsInProgress)
                 {
                     if (goal.GetType() == typeof(DistanceGoal))
                     {
-                        if (type == goal.type)
+                        if (type == goal.sportType)
                         {
                             goal.AddProgress(distanceInMeters);
                         }
@@ -51,7 +51,7 @@ namespace ClassLibrary
 
                     if (goal.GetType() == typeof(TimeGoal))
                     {
-                        if (type == goal.type)
+                        if (type == goal.sportType)
                         {
                             goal.AddProgress(timeInSeconds);
                         }

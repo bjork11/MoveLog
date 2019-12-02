@@ -25,10 +25,10 @@ namespace ConsoleApplication
                 Console.WriteLine("3 | Completed Workouts");
                 Console.WriteLine("4 | Quit\n");
 
-                Console.Write("Select a number: ");
+                Console.Write("Select a number");
                 try
                 {
-                    Console.Write("Choice : ");
+                    Console.Write(": ");
                     int userInput = Convert.ToInt32(Console.ReadLine());
 
                     if (userInput > 4 || userInput < 1)
@@ -42,7 +42,8 @@ namespace ConsoleApplication
                 }
                 catch
                 {
-                    Console.WriteLine("Only numbers between 1-4");
+                    Console.WriteLine("Only numbers between 1-4!");
+                    Console.ReadLine();
                 }
 
             } while (true);
@@ -72,7 +73,7 @@ namespace ConsoleApplication
                         Console.WriteLine("3 | See your goals");
                         Console.WriteLine("4 | Go back to main menu");
 
-                        Console.Write("Select a number: ");
+                        Console.Write("Select a number");
 
                         int inputForGoal = IntUserInputTryCatch();
                         Console.Clear();
@@ -100,7 +101,7 @@ namespace ConsoleApplication
                                     if (removeGoalChoice > Goals.goalsInProgress.Count)
                                     {
                                         Console.Clear();
-                                        Console.WriteLine("you dont have a goal matching that index");
+                                        Console.WriteLine("You don't have a goal matching that index");
                                         return;
                                     }
 
@@ -123,6 +124,7 @@ namespace ConsoleApplication
                             default:
                                 doWhileLoop = true;
                                 Console.WriteLine("1-4 only");
+                                Console.ReadLine();
                                 break;
                         }
 
@@ -163,7 +165,7 @@ namespace ConsoleApplication
         //används för att välja sport när du ska registrera ett mål med distans.
         public void ChooseSportForDistanceGoal(enumSportMenu choice1)
         {
-            Console.WriteLine("Enter how many meters your goal should be: ");
+            Console.WriteLine("Enter how many meters your goal should be");
             int inputMeter = IntUserInputTryCatch();
 
             switch (choice1)
@@ -236,13 +238,15 @@ namespace ConsoleApplication
 
                 default:
                     throw new ArgumentOutOfRangeException("Only 1-3");
+                    
             }
+            Console.ReadLine();
         }
 
         // skickas in i IntUserInputTryCatch som är en tryCatch för int,retunerar sedan värdet
         public int GetWorkoutDistance()
         {
-            Console.Write("Enter distance in meters: ");
+            Console.Write("Enter distance in meters");
             int inputMeters = IntUserInputTryCatch();
             return inputMeters;
         }
@@ -250,7 +254,7 @@ namespace ConsoleApplication
         // skickas in i IntUserInputTryCatch som är en tryCatch för int,retunerar sedan värdet
         public int GetWorkoutTime()
         {
-            Console.Write("Enter time in seconds: ");
+            Console.Write("Enter time in seconds");
             int inputSeconds = IntUserInputTryCatch();
 
             return inputSeconds;
@@ -260,7 +264,7 @@ namespace ConsoleApplication
         {
             do
             {
-                Console.Write("Choice : ");
+                Console.Write(": ");
                 try
                 {
                     int userInput = Convert.ToInt32(Console.ReadLine());
@@ -268,7 +272,8 @@ namespace ConsoleApplication
                 }
                 catch
                 {
-                    Console.WriteLine("Only Numbers");
+                    Console.WriteLine("Only numbers!");
+                    Console.ReadLine();
                 }
 
             } while (true);
@@ -283,11 +288,11 @@ namespace ConsoleApplication
                 Console.WriteLine("1 | Running");
                 Console.WriteLine("2 | Walking");
                 Console.WriteLine("3 | Biking");
-                Console.WriteLine("What sport? ");
+                Console.Write("What sport");
 
                 try
                 {
-                    Console.Write("Choice : ");
+                    Console.Write(": ");
                     int userInput = Convert.ToInt32(Console.ReadLine());
 
                     if (userInput > 3 || userInput < 1)

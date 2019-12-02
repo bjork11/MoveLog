@@ -11,6 +11,13 @@ namespace ConsoleApplication
             {
                 Console.WriteLine(workouts);
             }
+            Console.ReadLine();
+
+            if (Sport.completedWorkouts.Count == 0)
+            {
+                Console.WriteLine("You havn't registered any workouts yet! :(");
+            }
+
         }
         public static void PrintCompletedGoals()
         {
@@ -22,6 +29,8 @@ namespace ConsoleApplication
                 i++;
                 Console.WriteLine($"{i}: {goal.ToString()}");
             }
+
+            Console.WriteLine();
         }
         public static void PrintGoalsInProgress()
         {
@@ -33,6 +42,13 @@ namespace ConsoleApplication
                 i++;
                 Console.WriteLine($"{i}: {goal.ToString()}");
             }
+
+            if(Goals.goalsInProgress.Count == 0)
+            {
+                Console.WriteLine("Nothing to see here.. :(\nSet a goal and get your fat body moving!");
+            }
+
+            Console.ReadLine();
         }
     }
 }

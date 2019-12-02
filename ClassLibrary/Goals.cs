@@ -7,7 +7,7 @@ namespace ClassLibrary
     {
         protected bool goalCompleted;
         //Typ av Sport målet är uppsatt för
-        public string type;
+        public string sportType;
         //Målen som är pågående
         public static List<Goals> goalsInProgress = new List<Goals>();
         //Alla mål som är avklarade
@@ -57,7 +57,7 @@ namespace ClassLibrary
         //Konstruktor som tar in hur långt målet ska vara och vilket sport målet ska vara för.
         public DistanceGoal(int inputMeter, string typeOfWorkout)
         {
-            type = typeOfWorkout;
+            sportType = typeOfWorkout;
             goalCompleted = false;
             meterTowardsGoal = 0;
             goalInMeter = inputMeter;
@@ -66,7 +66,7 @@ namespace ClassLibrary
         //ToString-override för att skriva ut hur nära ett mål är att bli avklarat. 
         public override string ToString()
         {
-            return string.Format($"{type}: {meterTowardsGoal}/{goalInMeter} meter");
+            return string.Format($"{sportType}: {meterTowardsGoal}/{goalInMeter} meter");
         }
 
         //Lägger till träningspassets distans till meterTowardsGoal
@@ -103,7 +103,7 @@ namespace ClassLibrary
         private int goalInSeconds;
         public TimeGoal(int inputSecond, string typeOfWorkout)
         {
-            type = typeOfWorkout;
+            sportType = typeOfWorkout;
             goalCompleted = false;
             secondsTowardsGoal = 0;
             goalInSeconds = inputSecond;
@@ -111,7 +111,7 @@ namespace ClassLibrary
 
         public override string ToString()
         {
-            return string.Format($"{type}: {secondsTowardsGoal}/{goalInSeconds} sekunder");
+            return string.Format($"{sportType}: {secondsTowardsGoal}/{goalInSeconds} sekunder");
         }
 
          public override void AddProgress(int seconds)

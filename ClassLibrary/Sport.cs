@@ -20,13 +20,21 @@ namespace ClassLibrary
 
             return t.ToString();
         }
+        //Ändrar meter till KM för snyggare utskrift i avklarade träningspass i listan över completedWorkouts.
+        public double ChangeDistanceToKm(int distanceInMeter)
+        {
+            double distanceInKm = distanceInMeter;
+            distanceInKm = (distanceInKm / 1000);
 
-        //Lägger till träningspass där avnändaren får mata in distans och tid på träningspasset. 
+            return Math.Round(distanceInKm, 2);
+        }
+
+        //Lägger till träningspass där användaren får mata in distans och tid på träningspasset. 
         //Kollar sedan om något mål av samma typ finns och uppdaterar det.
         //Och därefter flyttar den målet från listan "goalsinProgress" till listan "goalsCompleted"
         public void AddWorkout(int distanceInMeters, int timeInSeconds)
         {
-            completedWorkouts.Add($"Workout: {type}. Distance: {distanceInMeters / 1000}km. Time: {timeInSeconds / 60}min. Time Per KM: {PacePerDistance(distanceInMeters, timeInSeconds)}");
+            completedWorkouts.Add($"Workout: {type}. Distance: {ChangeDistanceToKm(distanceInMeters)}km. Time: {timeInSeconds / 60}min. Time Per KM: {PacePerDistance(distanceInMeters, timeInSeconds)}");
 
             AddProgressToGoal(timeInSeconds, distanceInMeters);
 

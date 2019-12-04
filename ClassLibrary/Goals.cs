@@ -7,7 +7,7 @@ namespace ClassLibrary
     {
         protected bool goalCompleted;
         //Typ av Sport målet är uppsatt för
-        public string sportType;
+        internal string sportType;
         //Målen som är pågående
         public static List<Goals> goalsInProgress = new List<Goals>();
         //Alla mål som är avklarade
@@ -15,7 +15,7 @@ namespace ClassLibrary
 
         //Metod som körs i Sport.AddWorkout()-metoden för att flytta målet mellan listorna
         //goalsInProgress och completedGoals om målet är avklarat.
-        public static void TransferIfCompleted()
+        internal static void TransferIfCompleted()
         {
             //Listan används tillfälligt för att ta bort alla avklarade mål från goalsInProgress. Detta för att slippa redigera listan medan vi går igenom den.
             List<Goals> notCompletedGoals = new List<Goals>();
@@ -36,7 +36,7 @@ namespace ClassLibrary
         }
 
         //Returnerar false/true om målet är uppnått. Olika override beroende på typen av mål.
-        public abstract bool GoalAchieved();
+        protected abstract bool GoalAchieved();
 
         //Tar bort specifikt mål utifrån plats i listan över goalsInProgress
         public static void RemoveGoal(int input)
@@ -44,18 +44,17 @@ namespace ClassLibrary
             goalsInProgress.RemoveAt(input);
         }
 
-        public abstract void AddProgress(int progress);
+        internal abstract void AddProgress(int progress);
     }
 
     public class DistanceGoal : Goals
     {
         //För att hålla koll på hur nära målet man kommit
-        private int meterTowardsGoal;
-        public int _meterTowardsGoal { get; set; }
+        internal int meterTowardsGoal; 
         //Hur långt man sätter upp att målet ska vara i meter
         private int goalInMeter;
         //Konstruktor som tar in hur långt målet ska vara och vilket sport målet ska vara för.
-        public DistanceGoal(int inputMeter, string typeOfWorkout)
+        private DistanceGoal(int inputMeter, string typeOfWorkout)
         {
             sportType = typeOfWorkout;
             goalCompleted = false;
@@ -70,13 +69,13 @@ namespace ClassLibrary
         }
 
         //Lägger till träningspassets distans till meterTowardsGoal
-        public override void AddProgress(int meter)
+        internal override void AddProgress(int meter)
         {
             meterTowardsGoal += meter;
         }
 
         //Ifall målet är uppnåt returnera true. För att veta när målet ska flyttas från en lista till en annan.
-        public override bool GoalAchieved()
+        protected override bool GoalAchieved()
         {
             if (meterTowardsGoal >= goalInMeter)
             {
@@ -101,7 +100,7 @@ namespace ClassLibrary
 
         //Hur länge man ska träna för att uppfylla målet i sekunder.
         private int goalInSeconds;
-        public TimeGoal(int inputSecond, string typeOfWorkout)
+        private TimeGoal(int inputSecond, string typeOfWorkout)
         {
             sportType = typeOfWorkout;
             goalCompleted = false;
@@ -114,12 +113,12 @@ namespace ClassLibrary
             return string.Format($"{sportType}: {secondsTowardsGoal}/{goalInSeconds} sekunder");
         }
 
-         public override void AddProgress(int seconds)
+        internal override void AddProgress(int seconds)
         {
             secondsTowardsGoal += seconds;
         }
 
-        public override bool GoalAchieved()
+        protected override bool GoalAchieved()
         {
             if (secondsTowardsGoal >= goalInSeconds)
             {

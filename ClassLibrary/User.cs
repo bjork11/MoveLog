@@ -9,6 +9,7 @@ namespace ClassLibrary
         DateTime dateOfBirth;
         string userName;
         string password;
+        int userId;
         
         public User(string _FirstName, string _LastName, DateTime _DateOfBirth)
         {

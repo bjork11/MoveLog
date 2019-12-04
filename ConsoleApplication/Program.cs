@@ -13,7 +13,7 @@ namespace ConsoleApplication
             do
             {
                 // Gör en instans av meny-klassen, tillkallar userinput som convertas till enum och skickas in i mainmenun.
-                Menu.enumMainMenu choice = menu.GetUserInputMainMenuSwitch();
+                Menu.enumMainMenu choice = menu.GetUserInputForMainMenu();
 
                 if (choice == Menu.enumMainMenu.quit)
                 {

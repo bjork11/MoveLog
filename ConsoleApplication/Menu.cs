@@ -15,7 +15,7 @@ namespace ConsoleApplication
         // enum metod som skriver ut huvudmenyn och kollar felhantering
         // Convertar choice som blir inputen till en enum switch casen i MainMenu metoden
         // retunerar choice till Main och skickar in de som användaren skrev in.
-        public enumMainMenu GetUserInputMainMenuSwitch()
+        public enumMainMenu GetUserInputForMainMenu()
         {
             do
             {
@@ -39,6 +39,7 @@ namespace ConsoleApplication
 
                     enumMainMenu choice = (enumMainMenu)userInput;
                     return choice;
+
                 }
                 catch
                 {
@@ -67,6 +68,7 @@ namespace ConsoleApplication
                     // enum switch i en enum switch för goals menyn
                     do
                     {
+                        Console.Clear();
                         Console.WriteLine("1 | Set a goal");
                         Console.WriteLine("2 | Remove a goal");
                         Console.WriteLine("3 | See your goals");
@@ -75,6 +77,7 @@ namespace ConsoleApplication
                         Console.Write("Select a number");
 
                         int inputForGoal = IntUserInputTryCatch();
+
                         Console.Clear();
                         switch (inputForGoal)
                         {
@@ -140,7 +143,7 @@ namespace ConsoleApplication
         }
 
         // tar input från användaren och kollar så den stämmer med de alternativ som finns
-        public enumChooseTypeOfGoalMenu ChooseTypeOfGoal()
+        private enumChooseTypeOfGoalMenu ChooseTypeOfGoal()
         {
             enumChooseTypeOfGoalMenu choice = enumChooseTypeOfGoalMenuTryCatch();
 
@@ -154,7 +157,7 @@ namespace ConsoleApplication
                 case enumChooseTypeOfGoalMenu.setTimeGoal:
                     Menu.enumSportMenu choice2 = enumTryCatchForSportMenu();
                     ChooseSportForTimeGoal(choice2);
-                    return choice; 
+                    return choice;
 
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -162,7 +165,7 @@ namespace ConsoleApplication
         }
 
         //används för att välja sport när du ska registrera ett mål med distans.
-        public void ChooseSportForDistanceGoal(enumSportMenu choice1)
+        private void ChooseSportForDistanceGoal(enumSportMenu choice1)
         {
             Console.WriteLine("Enter how many meters your goal should be");
             int inputMeter = IntUserInputTryCatch();
@@ -186,7 +189,7 @@ namespace ConsoleApplication
             }
         }
         //används för att välja sport när du ska registrera ett mål med tid.
-        public void ChooseSportForTimeGoal(enumSportMenu choice2)
+        private void ChooseSportForTimeGoal(enumSportMenu choice2)
         {
             Console.WriteLine("Enter how many seconds your goal should be");
             int inputSecond = IntUserInputTryCatch();
@@ -206,14 +209,14 @@ namespace ConsoleApplication
                     break;
 
                 default:
-                    throw new ArgumentOutOfRangeException("");
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
         // skickar in inputen för typen av sport
         // båda int variablerna går igenom en try catch för att kolla så de är int
         //en instansiering av klassen görs sen skickar vi in Seconds och Meters till addWorkout för att lägga till en färdig träning
-        public void chooseTypOfTraining(enumSportMenu Choice2)
+        private void chooseTypOfTraining(enumSportMenu Choice2)
         {
             int inputMeters = GetWorkoutDistance();
             int inputSeconds = GetWorkoutTime();
@@ -237,13 +240,13 @@ namespace ConsoleApplication
 
                 default:
                     throw new ArgumentOutOfRangeException("Only 1-3");
-                    
+
             }
             Console.ReadLine();
         }
 
         // skickas in i IntUserInputTryCatch som är en tryCatch för int,retunerar sedan värdet
-        public int GetWorkoutDistance()
+        private int GetWorkoutDistance()
         {
             Console.Write("Enter distance in meters");
             int inputMeters = IntUserInputTryCatch();
@@ -251,7 +254,7 @@ namespace ConsoleApplication
         }
 
         // skickas in i IntUserInputTryCatch som är en tryCatch för int,retunerar sedan värdet
-        public int GetWorkoutTime()
+        private int GetWorkoutTime()
         {
             Console.Write("Enter time in seconds");
             int inputSeconds = IntUserInputTryCatch();
@@ -259,7 +262,7 @@ namespace ConsoleApplication
             return inputSeconds;
         }
         // Try catch metod för alla int inputs som görs i programmet 
-        public int IntUserInputTryCatch()
+        private int IntUserInputTryCatch()
         {
             do
             {
@@ -280,7 +283,7 @@ namespace ConsoleApplication
 
         // enum metod som kollar om användarens input stämmer med alternativen som finns
         // om inputen stämmer convertas den till enum choice och retuneras till ChooseTypOFGoal(Valet av sport)
-        public enumSportMenu enumTryCatchForSportMenu()
+        private enumSportMenu enumTryCatchForSportMenu()
         {
             do
             {
@@ -313,7 +316,7 @@ namespace ConsoleApplication
 
         // enum metod som kollar om användarens input stämmer med alternativen som finns
         // om inputen stämmer convertas den och skickas vidare 
-        public enumChooseTypeOfGoalMenu enumChooseTypeOfGoalMenuTryCatch()
+        private enumChooseTypeOfGoalMenu enumChooseTypeOfGoalMenuTryCatch()
         {
             do
             {

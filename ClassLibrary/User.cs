@@ -6,22 +6,16 @@ namespace ClassLibrary
     {
         string firstName;
         string lastName;
-        string DateOfBirth;
+        DateTime dateOfBirth;
         string userName;
         string password;
-
-        public User(string aFirstName, string aLastName, string aDateOfBirth)
+        int userId;
+        
+        public User(string _FirstName, string _LastName, DateTime _DateOfBirth)
         {
-            firstName = aFirstName;
-            lastName = aLastName;
-            DateOfBirth = aDateOfBirth;
-        }
-
-        public void AddPreDefinedUsersToList()
-        {
-            User UserJoel = new User(" Joel ", " Nilsson "," 1997-12-20 " );
-            User UserAdam = new User(" Adam ", " Björk ", " 1996-03-15 ");
-            User UserEllen = new User(" Ellen ", " Sdogos "," 1994-01-25 " );
+            firstName = _FirstName;
+            lastName = _LastName;
+            dateOfBirth = _DateOfBirth;
         }
     }
 }

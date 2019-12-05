@@ -10,7 +10,7 @@ namespace ClassLibrary
         public static List<string> completedWorkouts = new List<string>();
         protected string type;
         //Metod för att räkna ut hur lång tid varje kilometer tagit i genomsnitt.
-        public virtual string PacePerDistance(double distanceInMeters, double timeInSeconds)
+        public string PacePerDistance(double distanceInMeters, double timeInSeconds)
         {
             double distanceInKm = (distanceInMeters / 1000);
             double secondsPerKm = (timeInSeconds / distanceInKm);
@@ -20,13 +20,21 @@ namespace ClassLibrary
 
             return t.ToString();
         }
+        //Ändrar meter till KM för snyggare utskrift i avklarade träningspass i listan över completedWorkouts.
+        public double ChangeDistanceToKm(int distanceInMeter)
+        {
+            double distanceInKm = distanceInMeter;
+            distanceInKm = (distanceInKm / 1000);
 
-        //Lägger till träningspass där avnändaren får mata in distans och tid på träningspasset. 
+            return Math.Round(distanceInKm, 2);
+        }
+
+        //Lägger till träningspass där användaren får mata in distans och tid på träningspasset. 
         //Kollar sedan om något mål av samma typ finns och uppdaterar det.
         //Och därefter flyttar den målet från listan "goalsinProgress" till listan "goalsCompleted"
         public void AddWorkout(int distanceInMeters, int timeInSeconds)
         {
-            completedWorkouts.Add($"Workout: {type}. Distance: {distanceInMeters / 1000}km. Time: {timeInSeconds / 60}min. Time Per KM: {PacePerDistance(distanceInMeters, timeInSeconds)}");
+            completedWorkouts.Add($"Workout: {type}. Distance: {ChangeDistanceToKm(distanceInMeters)}km. Time: {timeInSeconds / 60}min. Time Per KM: {PacePerDistance(distanceInMeters, timeInSeconds)}");
 
             AddProgressToGoal(timeInSeconds, distanceInMeters);
 
@@ -39,11 +47,11 @@ namespace ClassLibrary
         public void AddProgressToGoal(int timeInSeconds, int distanceInMeters)
         {
             {
-                foreach (var goal in ClassLibrary.Goals.goalsInProgress)
+                foreach (var goal in Goals.goalsInProgress)
                 {
                     if (goal.GetType() == typeof(DistanceGoal))
                     {
-                        if (type == goal.type)
+                        if (type == goal.sportType)
                         {
                             goal.AddProgress(distanceInMeters);
                         }
@@ -51,7 +59,7 @@ namespace ClassLibrary
 
                     if (goal.GetType() == typeof(TimeGoal))
                     {
-                        if (type == goal.type)
+                        if (type == goal.sportType)
                         {
                             goal.AddProgress(timeInSeconds);
                         }

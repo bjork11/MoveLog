@@ -65,7 +65,7 @@ namespace ClassLibrary
         //ToString-override för att skriva ut hur nära ett mål är att bli avklarat. 
         public override string ToString()
         {
-            return string.Format($"{sportType}: {meterTowardsGoal}/{goalInMeter} meter");
+            return string.Format($"{sportType}: {meterTowardsGoal}/{goalInMeter} meters");
         }
 
         //Lägger till träningspassets distans till meterTowardsGoal
@@ -110,7 +110,7 @@ namespace ClassLibrary
 
         public override string ToString()
         {
-            return string.Format($"{sportType}: {secondsTowardsGoal}/{goalInSeconds} sekunder");
+            return string.Format($"{sportType}: {secondsTowardsGoal}/{goalInSeconds} seconds");
         }
 
         internal override void AddProgress(int seconds)

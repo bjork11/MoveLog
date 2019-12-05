@@ -17,6 +17,16 @@ namespace TrainingWebbApp
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            
+            //Lägger till mål en gång när servern startas för att visa hur det skulle kunna se ut
+            ClassLibrary.DistanceGoal.AddDistanceGoal(8000, "Running");
+            ClassLibrary.DistanceGoal.AddDistanceGoal(12000, "Biking");
+            ClassLibrary.TimeGoal.AddTimeGoal(5000, "Walking");
+            //Lägger även till workouts för att visa progress på de tillagda målen
+            ClassLibrary.Sport workout = new ClassLibrary.Running();
+            workout.AddWorkout(5000, 2000);
+            ClassLibrary.Sport workout2 = new ClassLibrary.Biking();
+            workout2.AddWorkout(3000, 1700);
         }
 
         public IConfiguration Configuration { get; }

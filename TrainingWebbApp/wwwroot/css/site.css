@@ -1,16 +1,9 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
+﻿a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
 }
 
-
-
-/* Sticky footer styles
--------------------------------------------------- */
 html {
   font-size: 14px;
 }
@@ -36,17 +29,14 @@ button.accept-policy {
   line-height: inherit;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
 html {
   position: relative;
   min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
   margin-bottom: 60px;
-  background-color: black;
+  background-color: white;
 }
 .footer {
   position: absolute;
@@ -54,24 +44,23 @@ body {
   width: 100%;
   white-space: nowrap;
   text-align: center;
-  /* Set the fixed height of the footer here */
   height: 60px;
-  line-height: 60px; /* Vertically center the text there */
+  line-height: 60px;
 }
 
 p{
-  color: white;
+  color: black;
   padding-bottom: 1em;
 }
 h1{
-  color: white;
+  color: black;
   font-variant: small-caps;
   padding-bottom: 1em;
   padding-top: 3em;
   font-weight: 100;
 }
 h2{
-  color: white;
+  color: black;
   font-variant: small-caps;
   padding-bottom: 0em;
   padding-top: 0em;
@@ -80,11 +69,11 @@ h2{
 h3{
   padding-top: 0em;
   padding-bottom: 1em;
-  color: white;
+  color: black;
 }
 h4{
   font-size: large;
-  color: white;
+  color: black;
   padding-top: 3em;
 }
 h5{
@@ -93,32 +82,32 @@ h5{
   font-size: xx-large;
   text-align: left;
   padding-bottom: 1em;
-  color: white;
+  color: black;
 }
 h6{
   padding-top: 3em;
   font-size: xx-large;
   text-align: left;
-  color: white;
+  color: black;
 }
 li{
-  color: white;
+  color: black;
 }
 
 /*Icon navbar */
 .icon-bar {
-  width: 90px; /* Set a specific width */
+  width: 90px; 
   height: 70px;
   padding: 0;
-  background-color: #555; /* Dark-grey background */
+  background-color: #555;
 }
 
 .icon-bar {
   width: 100%;
-  background-color: #555;
+  background-color: black;
   overflow: auto;
 }
-
+/* Text in the navbar */
 .icon-bar a {
   float: left;
   width: 20%;
@@ -133,22 +122,15 @@ li{
   background-color: #000;
 }
 
-.active {
-  background-color: rgb(22, 77, 230);
-}
-
-
 /* Register form */
 * {box-sizing: border-box;}
 
-/* Style the input container */
 .input-container {
   display: flex;
   width: 100%;
   margin-bottom: 15px;
 }
 
-/* Style the form icons */
 .icon {
   padding: 10px;
   background: dodgerblue;
@@ -157,7 +139,6 @@ li{
   text-align: center;
 }
 
-/* Style the input fields */
 .input-field {
   width: 100%;
   padding: 10px;
@@ -168,7 +149,6 @@ li{
   border: 2px solid dodgerblue;
 }
 
-/* Set a style for the submit button */
 .btn {
   background-color: dodgerblue;
   color: white;
@@ -183,35 +163,29 @@ li{
   opacity: 1;
 }
 
-
 /* Breadcrumb */
 
-/* Style the list */
 ul.breadcrumb {
   list-style: none;
-  background-color: black;
+  background-color: white;
 }
 
-/* Display list items side by side */
 ul.breadcrumb li {
   display: inline;
   font-size: 18px;
 }
 
-/* Add a slash symbol (/) before/behind each list item */
 ul.breadcrumb li+li:before {
   padding: 8px;
-  color: white;
+  color: black;
   content: "/\00a0";
 }
 
-/* Add a color to all links inside the list */
 ul.breadcrumb li a {
   color: #0275d8;
   text-decoration: none;
 }
 
-/* Add a color on mouse-over */
 ul.breadcrumb li a:hover {
   color: #01447e;
   text-decoration: underline;
@@ -253,14 +227,11 @@ img {
   border-radius: 50%;
 }
 
-
-
 /* Search field */
 * {
   box-sizing: border-box;
 }
 
-/* Style the search field */
 form.example input[type=text] {
   padding: 10px;
   font-size: 17px;
@@ -270,7 +241,6 @@ form.example input[type=text] {
   background: #f1f1f1;
 }
 
-/* Style the submit button */
 form.example button {
   float: left;
   width: 20%;
@@ -279,7 +249,7 @@ form.example button {
   color: white;
   font-size: 17px;
   border: 1px solid grey;
-  border-left: none; /* Prevent double borders */
+  border-left: none; 
   cursor: pointer;
 }
 
@@ -287,25 +257,22 @@ form.example button:hover {
   background: #0b7dda;
 }
 
-/* Clear floats */
 form.example::after {
   content: "";
   clear: both;
   display: table;
 }
 
-
-
 /* Style buttons */
 .btn-a {
-  background-color: black; /* Blue background */
-  border: none; /* Remove borders */
-  color: white; /* White text */
-  padding: 12px 16px; /* Some padding */
+  background-color: black; 
+  border: none; 
+  color: white; 
+  padding: 12px 16px; 
   padding-top: 1em;
-  font-size: 40px; /* Set a font size */
+  font-size: 40px; 
   font-weight: 300;
-  cursor: pointer; /* Mouse pointer on hover */
+  cursor: pointer; 
   padding: 15px 20px;
   border: none;
   cursor: pointer;
@@ -313,6 +280,7 @@ form.example::after {
   opacity: 0.9;
 }
 
+/*Dropdown-menu for workouts*/
 .dropdown-menu{
   width: 100%;
   text-align: center;
@@ -332,8 +300,6 @@ form.example::after {
 }
 
 /* Login form */
-
-
 test{
   margin: 0;
   padding: 0;
@@ -397,4 +363,8 @@ test2{
 }
 .box input[type = "submit"]:hover{
   background: #2ecc71;
+}
+.button [type = "goal"]{
+  background-color: dodgerblue;
+  color: black;
 }

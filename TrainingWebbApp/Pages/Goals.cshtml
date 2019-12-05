@@ -1,31 +1,36 @@
 ﻿@page
 @model TrainingWebbApp.Pages.GoalsModel
 @{
+  var myGoals = "My Goals";
+  var progressGoals = "In Progress";
+  var completedGoals = "Completed";
 }
 
-<!--<div class="container">
-  <div class="row">
-    <div class="col-sm-12" style="background-color:black;">
-      <h1>My Goals</h1>
-    </div>
-    <div class="col-sm-12" style="background-color:black;">
-      <h1>Team Goals</h1>
-    </div>
-  </div>
+<div class="text-center">
+    <h1 class="display-4">@myGoals</h1>
+</div>
+
+<div class="text-center" style="float:left">
+  <h2 style="padding-bottom:20px">@progressGoals</h2>
+  @foreach (var goals in ClassLibrary.Goals.goalsInProgress)
+  {
+    <li style="padding:10px">@goals</li>
+  }
+</div>
+
+<div class="button" style="width:30%; float:right;">
+    &nbsp;
+    <button type="goal" class="btn">Add New Goal</button>
+    &nbsp;
+    <button type="goal" class="btn">Remove Goal</button>
+</div>
+
+
+
+<!-- <div class="text-center" style="float: right;">
+  <h2 style="padding:20px">@completedGoals</h2>
+  @foreach (var goal in ClassLibrary.Goals.completedGoals)
+  {
+    <li style="padding:20px">@goal</li>
+  }
 </div> -->
-
-<div class="text-center">
-    <h5> My progress</h5>
-</div>
-
-<div class="progress" style="height:20px">
-  <div class="progress-bar" style="width:40%;height:20px">40%</div>
-</div>
-
-<div class="text-center">
-    <h5> Team progress</h5>
-</div>
-
-<div class="progress" style="height:20px">
-  <div class="progress-bar" style="width:70%;height:20px">70%</div>
-</div> 
